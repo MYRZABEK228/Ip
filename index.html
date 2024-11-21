@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IP-ді Көр!</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #222;
+      color: #fff;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #4CAF50;
+    }
+
+    button {
+      font-size: 2em;
+      padding: 20px 40px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .ip-display {
+      margin-top: 20px;
+      font-size: 1.5em;
+      color: #FFD700;
+    }
+  </style>
+</head>
+<body>
+  <h1>дайынсыз ба?</h1>
+  <button onclick="showIP()">Батырманы бас!</button>
+  <div id="ip-display" class="ip-display"></div>
+
+  <script>
+    function showIP() {
+      const ipDisplay = document.getElementById('ip-display');
+      ipDisplay.textContent = "IP анықталуда...";
+
+      // API арқылы IP алуға сұраныс
+      fetch('https://api.ipify.org?format=json')
+        .then(response => response.json())
+        .then(data => {
+          ipDisplay.textContent = `Сіздің IP адресіңіз: ${data.ip}`;
+        })
+        .catch(error => {
+          ipDisplay.textContent = "IP-ді анықтауда қате болды. Кейінірек қайталап көріңіз.";
+          console.error(error);
+        });
+    }
+  </script>
+</body>
+</html>
